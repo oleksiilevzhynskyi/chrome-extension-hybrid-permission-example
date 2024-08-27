@@ -21,15 +21,19 @@ It's an example of proposed "hybrid_permissions" property based on ["sample.opti
 
 ## Context
 
-So far, there are four kinds of permissions allowed by Chrome manifest V3:
+So far, there [are four kinds of permissions](https://developer.chrome.com/docs/extensions/develop/concepts/declare-permissions) allowed by Chrome manifest V3:
 - permissions
 - optional_permissions
 - host_permissions
 - optional_host_permissions
 
-Two of these, “permissions” and ”host_permissions” are applied by default upon installation. The user reviews them and agrees during installation. If the developer adds a new permission, Chrome either applies it silently or disables the extension and shows a warning asking the user to agree to the changes in the list of permissions. The UI for reapproval of such permission is very unclear, and in most cases, it means a loss of most active users.
+Two of these, “permissions” and ”host_permissions” are applied by default upon installation. The user reviews them and agrees during installation. If the developer adds a new permission, Chrome either applies it silently or disables the extension and shows a warning asking the user to agree to the changes in the list of permissions. [The UI for reapproval of such permission is very unclear](https://developer.chrome.com/docs/extensions/develop/concepts/permission-warnings), and in most cases, it means a loss of most active users.
+
+![Extension reapproval visualization](./assets/example-an-extension.gif)
 
 On the other hand, "optional_permissions" is a list of permissions that should be explicitly requested in code during runtime. Users may agree to or decline each of these permissions separately.
+
+![Optional permission request](./assets/optional-permission-request.png)
 
 
 ## Problem statement
@@ -68,11 +72,11 @@ In a nutshell, the hybrid permissions look and behave like “optional_permissio
 ```json
 {
   "name": "My extension",
-  ...
+  // ...
   "permissions": [],
   "optional_permissions": [],
   "hybrid_permissions": ["tabs"],
-  ...
+  // ...
 }
 ```
 
